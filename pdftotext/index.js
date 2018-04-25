@@ -10,7 +10,11 @@ const execFile = util.promisify(cp.execFile);
 
 function writePdf(context, req) {
     // TODO: validate inputs a bit more strongly
-    context.log(req.body);
+    context.log("TestResult:", {
+        isBuffer: Buffer.isBuffer(body),
+        length: body.length
+    });
+
     var bodyJson = JSON.parse(req.body);
     var name = bodyJson.filename;
     var data = bodyJson.data;
