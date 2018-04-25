@@ -15,7 +15,13 @@ function writePdf(context, req) {
         length: req.body.length
     });
 
-    var bodyJson = JSON.parse(req.body);
+    var bodyJson;
+    try {
+        bodyJson = JSON.parse(req.body);
+    } catch(e) {
+        // probably already parsed, treat it like it is
+        bodyJson = req.body;
+    }
     var name = bodyJson.filename;
     var data = bodyJson.data;
 
