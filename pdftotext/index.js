@@ -10,6 +10,7 @@ const execFile = util.promisify(cp.execFile);
 
 function writePdf(context, req) {
     // TODO: validate inputs a bit more strongly
+    //todo: test for conten type app/json
     context.log("TestResult:", {
         isBuffer: Buffer.isBuffer(req.body),
         length: req.body.length
@@ -40,7 +41,7 @@ function writePdf(context, req) {
                 // status: 200, /* Defaults to 200 */
                 body: {
                     "filename": "textfile",
-                    "text": error.toString()
+                    "text": stdout.toString()
                 }
             }
         })
@@ -49,7 +50,7 @@ function writePdf(context, req) {
                 status: 500,
                 body: {
                     "filename": "Error generating text from submitted PDF data - \
-                    are you sure you submitted a Base64-encoded PDF? Error: \r\n" + execFile
+                    are you sure you submitted a Base64-encoded PDF? Error: \r\n" + error
                 }
             };
         })
